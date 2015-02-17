@@ -12,22 +12,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Spider {
-    List<MovableEntity> spiders;
+public class Circle {
+    List<MovableEntity> circles;
     Vector2 speed;
     Sprite sprite;
     Random random;
-    int spiderFrequency;
+    int circleFrequency;
 
-    public Spider(Sprite sprite, float scale, Vector2 speed, int spiderFrequency) {
-        spiders = new ArrayList<MovableEntity>();
+    public Circle(Sprite sprite, float scale, Vector2 speed, int circleFrequency) {
+        circles = new ArrayList<MovableEntity>();
         this.sprite = sprite;
         sprite.setScale(scale);
-        this.spiderFrequency = spiderFrequency;
+        this.circleFrequency = circleFrequency;
         random = new Random();
     }
 
-    public void addSpider() {
+    public void addCircle() {
         Direction direction;
         switch(random.nextInt(4)) {
             case 0:
@@ -45,20 +45,23 @@ public class Spider {
             default:
                 direction = Direction.UP;
         }
-        MovableEntity spider = new MovableEntity(sprite, direction, speed);
-        spider.sprite.setPosition(random.nextInt(Gdx.graphics.getWidth()), random.nextInt(Gdx.graphics.getHeight()));
-        spiders.add(spider);
+        MovableEntity circle = new MovableEntity(sprite.getTexture(), direction, speed, sprite.getScaleX());
+        circle.sprite.setOrigin(random.nextInt(Gdx.graphics.getWidth()), random.nextInt(Gdx.graphics.getHeight()));
+        circles.add(circle);
     }
 
     public void render(SpriteBatch batch) {
-        //Generate spiders randomly, or when the enter key is pressed
-        if (((Gdx.input.isKeyPressed(Input.Keys.ENTER)) && Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) || (random.nextInt(180) < spiderFrequency)) {
-            addSpider();
+        if(random.nextInt(1000) < circleFrequency) {
+            addCircle();
         }
 
-        //Render spiders
-        for(Entity spider : spiders) {
-            spider.render(batch);
+        for(Entity circle : circles) {
+            if(Gdx.input.isTouched() && new Rectangle(Gdx.input.getX(), Gdx.input.getY(), 1, 1).overlaps(circle.sprite.getBoundingRectangle())) {
+                System.out.println("Hit circle");
+            } else {
+                System.out.println("Not hit");
+            }
+            circle.render(batch);
         }
     }
 }

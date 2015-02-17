@@ -24,25 +24,5 @@ public class Entity {
     public void render(SpriteBatch batch) {
         sprite.draw(batch);
     }
-        /*
-        for (EntityBody body : entities){
-            if (body.direction == 1){
-                body.rectangle.setX(body.rectangle.getX()+entitySpeed.x);
-                //RIGHT
-            }else if(body.direction == 2){
-                body.rectangle.setX(body.rectangle.getX()-entitySpeed.x);
-                //LEFT
-            }else if(body.direction == 3){
-                body.rectangle.setY(body.rectangle.getY()+entitySpeed.y);
-                //UP
-            }else{
-                body.rectangle.setY(body.rectangle.getY()-entitySpeed.y);
-                //DOWN
-            }
-            batch.draw(body.texture, body.rectangle.getX(), body.rectangle.getY(), body.rectangle.getWidth(), body.rectangle.getHeight());
-            //System.out.println("Running");
 
-
-        }
-        */
 }

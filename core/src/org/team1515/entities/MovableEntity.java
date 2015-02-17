@@ -1,5 +1,6 @@
 package org.team1515.entities;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -19,6 +20,13 @@ public class MovableEntity extends Entity {
 
     public MovableEntity(Sprite sprite, Direction direction, Vector2 speed, float scale) {
         super(sprite);
+        sprite.setScale(scale);
+        this.direction = direction;
+        this.speed = speed;
+    }
+
+    public MovableEntity(Texture texture, Direction direction, Vector2 speed, float scale) {
+        super(new Sprite(texture));
         sprite.setScale(scale);
         this.direction = direction;
         this.speed = speed;
